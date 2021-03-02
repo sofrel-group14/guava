@@ -128,10 +128,49 @@ public abstract class RateLimiter {
      */
     return create(permitsPerSecond, SleepingStopwatch.createFromSystemTimer());
   }
+    /**
+   * Creates a {@code RateLimiter} with the specified stable throughput, where maxBurstSeconds define the
+   * permit storage behaviour.
+   * 
+   *
+   * <p> This enables creation of {@code RateLimiter} with specified maxBurstSeconds where 
+   * maxBurstSeconds describes the amount of second it will increase the permits
+   * meaning that if we have maxBurstSeconds = 4 and permitsPerSecond = 10 it will be able to store
+   * 4*10 permits, meaning 40 stored permits can be used in case of a scenario with a bursty load.
+   * 
+   * @param permitsPerSecond the rate of the returned {@code RateLimiter}, measured in how many
+   *     permits become available per second
+   * @param maxBurstSeconds the maximum allowed time for increasing stored permits
+   * @throws IllegalArgumentException if {@code permitsPerSecond} is negative or zero
+   */
+  public static RateLimiter create(double permitsPerSecond, double maxBurstSeconds) {
+    /*
+     * The default RateLimiter configuration can save the unused permits of up to one second. This
+     * is to avoid unnecessary stalls in situations like this: A RateLimiter of 1qps, and 4 threads,
+     * all calling acquire() at these moments:
+     *
+     * T0 at 0 seconds
+     * T1 at 1.05 seconds
+     * T2 at 2 seconds
+     * T3 at 3 seconds
+     *
+     * Due to the slight delay of T1, T2 would have to sleep till 2.05 seconds, and T3 would also
+     * have to sleep till 3.05 seconds.
+     */
+    return create(permitsPerSecond, SleepingStopwatch.createFromSystemTimer(), maxBurstSeconds);
+  }
+
 
   @VisibleForTesting
   static RateLimiter create(double permitsPerSecond, SleepingStopwatch stopwatch) {
-    RateLimiter rateLimiter = new SmoothBursty(stopwatch, 1.0 /* maxBurstSeconds */);
+    RateLimiter rateLimiter = new SmoothBursty(stopwatch, 1 /* maxBurstSeconds */);
+    rateLimiter.setRate(permitsPerSecond);
+    return rateLimiter;
+  }
+
+  @VisibleForTesting
+  static RateLimiter create(double permitsPerSecond, SleepingStopwatch stopwatch, double maxBurstSeconds) {
+    RateLimiter rateLimiter = new SmoothBursty(stopwatch, maxBurstSeconds);
     rateLimiter.setRate(permitsPerSecond);
     return rateLimiter;
   }

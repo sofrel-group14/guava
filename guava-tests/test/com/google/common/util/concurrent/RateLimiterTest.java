@@ -38,6 +38,10 @@ import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.mockito.Mockito;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import static java.time.Duration.between;
 /**
  * Tests for RateLimiter.
  *
@@ -563,6 +567,47 @@ public class RateLimiterTest extends TestCase {
       return events.toString();
     }
   }
+
+  /**
+   * This test is related to (https://github.com/google/guava/issues/5372)
+   * The test was suggested by William1104(https://github.com/William1104)
+   * This tests sets the maxBurstSeconds to 0 to be able to avoid overflow
+   * 
+   */
+  public void testRateLimitBurstBehavior() throws Exception {
+    final int queryPerSecond = 10;
+    final Random random = new Random(System.nanoTime());
+    final RateLimiter rateLimiter = RateLimiter.create(queryPerSecond,0);
+
+    final List<Instant> emitTimes = new ArrayList<>();
+    final int maxSleepIntervalInNanoseconds = 1000 / queryPerSecond * 2;
+    for (int i = 0; i < 10 * queryPerSecond; i++) {
+        MILLISECONDS.sleep(random.nextInt(maxSleepIntervalInNanoseconds));
+        rateLimiter.acquire();
+        emitTimes.add(Instant.now());
+    }
+
+    for (int i = 0; i < emitTimes.size() - queryPerSecond - 1; i++) {
+        final Duration timeTook = between(emitTimes.get(i), emitTimes.get(i + queryPerSecond + 1));
+        assertTrue(timeTook.compareTo(Duration.ofSeconds(1)) >= 0);
+    }
+  }
+
+  /**
+   * Test that permits can be saved for up to {@code maxBurstSeconds} and can be acquired immediately.
+   */
+  public void testAssertTrueAbilityForDefinedBurstBehaviour() throws Exception {
+    final int permitsPerSecond = 5;
+    final int amountOfSeconds = 1;
+    final double maxBurstSeconds = 10.0;
+    final RateLimiter rateLimiter = RateLimiter.create(permitsPerSecond, maxBurstSeconds);
+
+    // 10 seconds, i.e. 10 000 ms
+    stopwatch.sleepMillis(maxBurstSeconds * 1000);
+    // We should be able to acquire 50 permits immediately
+    assertTrue("Couldn't acquire all saved permits", rateLimiter.tryAcquire(50, 0, SECONDS));
+  }
+
 
   /*
    * Note: Mockito appears to lose its ability to Mock doGetRate as of Android 21. If we start
