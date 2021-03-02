@@ -38,6 +38,10 @@ import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.mockito.Mockito;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import static java.time.Duration.between;
 /**
  * Tests for RateLimiter.
  *
@@ -561,6 +565,26 @@ public class RateLimiterTest extends TestCase {
     @Override
     public String toString() {
       return events.toString();
+    }
+  }
+
+  //Internet-Person-IP contribution
+  public void testGuavaRateLimitTaqui() throws Exception {
+    final int queryPerSecond = 10;
+    final Random random = new Random(System.nanoTime());
+    final RateLimiter rateLimiter = RateLimiter.create(queryPerSecond);
+
+    final List<Instant> emitTimes = new ArrayList<>();
+    final int maxSleepIntervalInNanoseconds = 1000 / queryPerSecond * 2;
+    for (int i = 0; i < 10 * queryPerSecond; i++) {
+        MILLISECONDS.sleep(random.nextInt(maxSleepIntervalInNanoseconds));
+        rateLimiter.acquire();
+        emitTimes.add(Instant.now());
+    }
+
+    for (int i = 0; i < emitTimes.size() - queryPerSecond - 1; i++) {
+        final Duration timeTook = between(emitTimes.get(i), emitTimes.get(i + queryPerSecond + 1));
+        assertTrue(timeTook.compareTo(Duration.ofSeconds(1)) >= 0);
     }
   }
 
