@@ -572,7 +572,7 @@ public class RateLimiterTest extends TestCase {
   public void testGuavaRateLimitTaqui() throws Exception {
     final int queryPerSecond = 10;
     final Random random = new Random(System.nanoTime());
-    final RateLimiter rateLimiter = RateLimiter.create(queryPerSecond);
+    final RateLimiter rateLimiter = RateLimiter.create(queryPerSecond,0);
 
     final List<Instant> emitTimes = new ArrayList<>();
     final int maxSleepIntervalInNanoseconds = 1000 / queryPerSecond * 2;
