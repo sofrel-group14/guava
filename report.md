@@ -42,10 +42,11 @@ There were some onboarding issues regarding how to contribute to the project. If
 >> 8. running code?
 >> For setting up tools and libraries (step 4), enumerate all dependencies you took care of and where you spent your time, if that time exceeds 30 minutes.
 
-[Link to Andreas’ log book](https://docs.google.com/document/d/1OZsjMdH_ppJU72kHMfrgS7PO7WUo6HUFv6ujeiKdi5E/edit)</br>
-[Link to Axel’s log book](https://docs.google.com/document/d/13l8DoYcv7jKFH0Vujod18wp6Q88Kw9efTzjfDmGxASk/edit)</br>
-[Link to Taqui’s log book](https://docs.google.com/document/d/1H5bNKT5r8lJACJ4CnDGRqnWz6zWudV0phNIk8eIEWvI/edit)</br>
-[Link to Yannis’s log book](https://docs.google.com/document/d/1zTKMO_6bLzeEWNbbSPKQMBnQs8BoDphy1V4oTGs0_ns/edit?usp=sharing)
+[Link to Andreas’ log book](https://docs.google.com/document/d/1OZsjMdH_ppJU72kHMfrgS7PO7WUo6HUFv6ujeiKdi5E/edit?usp=sharing)</br>
+[Link to Axel’s log book](https://docs.google.com/document/d/13l8DoYcv7jKFH0Vujod18wp6Q88Kw9efTzjfDmGxASk/edit?usp=sharing)</br>
+[Link to Taqui’s log book](https://docs.google.com/document/d/1H5bNKT5r8lJACJ4CnDGRqnWz6zWudV0phNIk8eIEWvI/edit?usp=sharing)</br>
+[Link to Yannis’s log book](https://docs.google.com/document/d/1zTKMO_6bLzeEWNbbSPKQMBnQs8BoDphy1V4oTGs0_ns/edit?usp=sharing)</br>
+[Link to Telo’s log book]()
 
 ## Overview of issue(s) and work done
 
