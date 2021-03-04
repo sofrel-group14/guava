@@ -4,9 +4,9 @@
 
 Description from their project:
 
-`
-Guava is a set of core Java libraries from Google that includes new collection types (such as multimap and multiset), immutable collections, a graph library, and utilities for concurrency, I/O, hashing, caching, primitives, strings, and more! It is widely used on most Java projects within Google, and widely used by many other companies as well.
-`
+
+> Guava is a set of core Java libraries from Google that includes new collection types (such as multimap and multiset), immutable collections, a graph library, and utilities for concurrency, I/O, hashing, caching, primitives, strings, and more! It is widely used on most Java projects within Google, and widely used by many other companies as well.
+
 
 ## Onboarding experience
 >> Did you choose a new project or continue on the previous one?
@@ -59,18 +59,14 @@ TODO: Scope (functionality and code affected).
 
 >> Optional (point 3): trace tests to requirements.
 
-Requirements
-ID
-Title
-Description
-R1
-Allow RateLimiter users to specify burst behavior (max burst seconds)
-Currently, the maxBurstSeconds is always set to 1.0. By passing additional parameters, we could allow users to specify this instead.
+| **ID**  | **Relevant tests** | **Title**                                                                       | **Description**                                                                                                                                                                                                                                                                         |
+| --------|--------------------|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| R1 	    | ***TODO***         | Allow RateLimiter users to specify burst behavior (max burst seconds)           | [Currently](https://github.com/google/guava/blob/e5b5bc42c8c5dfe7c77a64726bf0df07c6fc40c3/guava/src/com/google/common/util/concurrent/RateLimiter.java#L134), the maxBurstSeconds is always set to 1.0. By passing additional parameters, we could allow users to specify this instead. |
 
 
 ## Project plan
 
-_Written on Tuesday 2/3_
+_Written on Tuesday 2/3_</br>
 For testing, we will first try to use the test provided in the issue. After that we will come up with at least 2-3 more test cases, and make sure they fail before fixing the issue.
 
 To fix the issue, we are preliminarily adding a parameter for maxBurstSeconds and then we will run the tests to see if they pass.
