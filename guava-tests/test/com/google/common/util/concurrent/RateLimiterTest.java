@@ -568,8 +568,13 @@ public class RateLimiterTest extends TestCase {
     }
   }
 
-  //Internet-Person-IP contribution
-  public void testGuavaRateLimitTaqui() throws Exception {
+  /**
+   * This test is related to (https://github.com/google/guava/issues/5372)
+   * The test was suggested by William1104(https://github.com/William1104)
+   * This tests sets the maxBurstSeconds to 0 to be able to avoid overflow
+   * 
+   */
+  public void testRateLimitBurstBehavior() throws Exception {
     final int queryPerSecond = 10;
     final Random random = new Random(System.nanoTime());
     final RateLimiter rateLimiter = RateLimiter.create(queryPerSecond,0);
@@ -587,6 +592,31 @@ public class RateLimiterTest extends TestCase {
         assertTrue(timeTook.compareTo(Duration.ofSeconds(1)) >= 0);
     }
   }
+
+  /**
+   * This test that the maxBurstSeconds works even if you have a different value than 1
+   * So in this case we would only be able to get 11 permits during 4 seconds
+   */
+  public void testAssertTrueAbilityForDefinedBurstBehaviourTaqui() throws Exception {
+    final int amountOfQueries = 11;
+    final int amountOfSeconds = 4;
+    final Random random = new Random(System.nanoTime());
+    final RateLimiter rateLimiter = RateLimiter.create(amountOfQueries, amountOfSeconds);
+  
+    final List<Instant> emitTimes = new ArrayList<>();
+    final int maxSleepIntervalInNanoseconds = 1000 / (amountOfQueries/amountOfSeconds) * 2;
+    for (int i = 0; i < 10 * amountOfQueries; i++) {
+        MILLISECONDS.sleep(random.nextInt(maxSleepIntervalInNanoseconds));
+        rateLimiter.acquire();
+        emitTimes.add(Instant.now());
+    }
+  
+    for (int i = 0; i < emitTimes.size() - amountOfQueries - 1; i++) {
+        final Duration timeTook = between(emitTimes.get(i), emitTimes.get(i + amountOfQueries + 1));
+        assertTrue(timeTook.compareTo(Duration.ofSeconds(amountOfSeconds)) >= 0);
+    }
+  }
+
 
   /*
    * Note: Mockito appears to lose its ability to Mock doGetRate as of Android 21. If we start
