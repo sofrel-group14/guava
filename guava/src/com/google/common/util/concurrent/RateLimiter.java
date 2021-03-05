@@ -128,8 +128,19 @@ public abstract class RateLimiter {
      */
     return create(permitsPerSecond, SleepingStopwatch.createFromSystemTimer());
   }
-
-  public static RateLimiter create(double permitsPerSecond, double maxBurstSeconds) {
+    /**
+   * Creates a {@code RateLimiter} with the specified stable throughput, 
+   * permits per maxBurstSeconds
+   *
+   * <p> This enables creation of {@code RateLimiter} with specified maxBurstSeconds and an amount of 
+   * permits you can get during those maxBurstSeconds.
+   *
+   * @param permits the rate of the returned {@code RateLimiter}, measured in how many
+   *     permits become available per {@code maxBurstSeconds}
+   * @param maxBurstSeconds the maximum allowed time for issueing permits
+   * @throws IllegalArgumentException if {@code permitsPerSecond} is negative or zero
+   */
+  public static RateLimiter create(double permits, double maxBurstSeconds) {
     /*
      * The default RateLimiter configuration can save the unused permits of up to one second. This
      * is to avoid unnecessary stalls in situations like this: A RateLimiter of 1qps, and 4 threads,
@@ -143,7 +154,7 @@ public abstract class RateLimiter {
      * Due to the slight delay of T1, T2 would have to sleep till 2.05 seconds, and T3 would also
      * have to sleep till 3.05 seconds.
      */
-    return create(permitsPerSecond, SleepingStopwatch.createFromSystemTimer(), maxBurstSeconds);
+    return create(permits, SleepingStopwatch.createFromSystemTimer(), maxBurstSeconds);
   }
 
 
@@ -155,9 +166,9 @@ public abstract class RateLimiter {
   }
 
   @VisibleForTesting
-  static RateLimiter create(double permitsPerSecond, SleepingStopwatch stopwatch, double maxBurstSeconds) {
+  static RateLimiter create(double permits, SleepingStopwatch stopwatch, double maxBurstSeconds) {
     RateLimiter rateLimiter = new SmoothBursty(stopwatch, maxBurstSeconds);
-    rateLimiter.setRate(permitsPerSecond);
+    rateLimiter.setRate(permits);
     return rateLimiter;
   }
 

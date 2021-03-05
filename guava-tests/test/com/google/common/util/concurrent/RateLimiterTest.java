@@ -597,7 +597,7 @@ public class RateLimiterTest extends TestCase {
    * This test that the maxBurstSeconds works even if you have a different value than 1
    * So in this case we would only be able to get 11 permits during 4 seconds
    */
-  public void testAssertTrueAbilityForDefinedBurstBehaviourTaqui() throws Exception {
+  public void testAssertTrueAbilityForDefinedBurstBehaviour() throws Exception {
     final int amountOfQueries = 11;
     final int amountOfSeconds = 4;
     final Random random = new Random(System.nanoTime());
