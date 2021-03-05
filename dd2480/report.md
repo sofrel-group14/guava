@@ -116,7 +116,7 @@ Tests run: 858390, Failures: 1, Errors: 0, Skipped: 515
 
 
 ## UML class diagram and its description
-[See this image](RateLimiter.png)
+[See this pdf](RateLimiter.pdf)
 
 Some claim parameter names shouldn't be included in UML diagrams. We chose to include them as it gives more clarity, but we could remove them if requested.
 
