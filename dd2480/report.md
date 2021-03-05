@@ -46,14 +46,14 @@ There were some onboarding issues regarding how to contribute to the project. If
 [Link to Axel’s log book](https://docs.google.com/document/d/13l8DoYcv7jKFH0Vujod18wp6Q88Kw9efTzjfDmGxASk/edit?usp=sharing)</br>
 [Link to Taqui’s log book](https://docs.google.com/document/d/1H5bNKT5r8lJACJ4CnDGRqnWz6zWudV0phNIk8eIEWvI/edit?usp=sharing)</br>
 [Link to Yannis’s log book](https://docs.google.com/document/d/1zTKMO_6bLzeEWNbbSPKQMBnQs8BoDphy1V4oTGs0_ns/edit?usp=sharing)</br>
-[Link to Telo’s log book]()
+[Link to Telo’s log book](https://docs.google.com/document/d/1jiuo0cPCG43uyqqq3H_S_siJ4fUuI8-NXqQDwG_-lMs/edit?usp=sharing)
 
 ## Overview of issue(s) and work done
 
 Title: Allow RateLimiter users to specify burst behavior</br>
 URL: https://github.com/google/guava/issues/5372</br>
-TODO: Summary in one or two sentences</br>
-TODO: Scope (functionality and code affected).
+Summary: Allow users of RateLimiter to specify `maxBurstSeconds`, i.e. the maximum amount of seconds that unused permits may be saved. 
+Scope: The code affects one class and one test.
 
 ## Requirements affected by functionality being refactored
 
@@ -114,7 +114,9 @@ Tests run: 858390, Failures: 1, Errors: 0, Skipped: 515
 
 
 ## UML class diagram and its description
-text
+[See this image](RateLimiter.png)
+
+Some claim parameter names shouldn't be included in UML diagrams. We chose to include them as it gives more clarity, but we could remove them if requested.
 
 ### Key changes/classes affected
 >> Optional (point 1): Architectural overview.</br>
