@@ -594,27 +594,18 @@ public class RateLimiterTest extends TestCase {
   }
 
   /**
-   * This test that the maxBurstSeconds works even if you have a different value than 1
-   * So in this case we would only be able to get 11 permits during 4 seconds
+   * Test that permits can be saved for up to {@code maxBurstSeconds} and can be acquired immediately.
    */
   public void testAssertTrueAbilityForDefinedBurstBehaviour() throws Exception {
-    final int amountOfQueries = 11;
-    final int amountOfSeconds = 4;
-    final Random random = new Random(System.nanoTime());
-    final RateLimiter rateLimiter = RateLimiter.create(amountOfQueries, amountOfSeconds);
-  
-    final List<Instant> emitTimes = new ArrayList<>();
-    final int maxSleepIntervalInNanoseconds = 1000 / (amountOfQueries/amountOfSeconds) * 2;
-    for (int i = 0; i < 10 * amountOfQueries; i++) {
-        MILLISECONDS.sleep(random.nextInt(maxSleepIntervalInNanoseconds));
-        rateLimiter.acquire();
-        emitTimes.add(Instant.now());
-    }
-  
-    for (int i = 0; i < emitTimes.size() - amountOfQueries - 1; i++) {
-        final Duration timeTook = between(emitTimes.get(i), emitTimes.get(i + amountOfQueries + 1));
-        assertTrue(timeTook.compareTo(Duration.ofSeconds(amountOfSeconds)) >= 0);
-    }
+    final int permitsPerSecond = 5;
+    final int amountOfSeconds = 1;
+    final double maxBurstSeconds = 10.0;
+    final RateLimiter rateLimiter = RateLimiter.create(permitsPerSecond, maxBurstSeconds);
+
+    // 10 seconds, i.e. 10 000 ms
+    stopwatch.sleepMillis(maxBurstSeconds * 1000);
+    // We should be able to acquire 50 permits immediately
+    assertTrue("Couldn't acquire all saved permits", rateLimiter.tryAcquire(50, 0, SECONDS));
   }
 
 
