@@ -86,7 +86,7 @@ If this turns out to be easy, we will see if there are other parameters we can â
 ## Test results
 
 Overall results with link to a copy or excerpt of the logs (before/after refactoring).</br>
-Before: TODO: Insert link to full log (tiny snippet below)</br>
+Before: [Here](https://docs.google.com/document/d/1SmHswX45TzwtsTXoYMrXX6k52KqOTBMEbWvpdAyyb-E/edit?usp=sharing)</br>
 Results: TODO: insert link to full log</br>
 
 Before:
@@ -130,4 +130,5 @@ Some claim parameter names shouldn't be included in UML diagrams. We chose to in
 >> Optional (point 6): How would you put your work in context with best software engineering practice?</br>
 >> Optional (point 7): Is there something special you want to mention here?
 
-[Link to Essence reflection](https://docs.google.com/document/d/1KQ4pNqrz04qa5X6lS0pwcGrY_X-ajNPmXTJFTWebimA/edit?usp=sharing)
+[Link to Essence reflection (Team)](https://docs.google.com/document/d/1KQ4pNqrz04qa5X6lS0pwcGrY_X-ajNPmXTJFTWebimA/edit?usp=sharing)
+[Link to Essence reflection (Stakeholders](https://docs.google.com/document/d/1Gz0xjgMnsVe-jKjnUyRclQ7hzCyAbgIlL_XLiSZovH8/edit?usp=sharing)
