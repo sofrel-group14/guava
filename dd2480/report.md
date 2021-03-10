@@ -149,6 +149,8 @@ Some claim parameter names shouldn't be included in UML diagrams. We chose to in
 >> Optional (point 1): Architectural overview.</br>
 >> Optional (point 2): relation to design pattern(s).</br>
 
+[Link](https://docs.google.com/document/d/1HeUaVDcl_Kz1gZWvzGYCmwQFg9veoXLZ2vUfagvIYEM/edit?usp=sharing) to document describing the general architectural overview of RateLimiter and its subclasses.
+
 ## Overall experience
 >> What are your main take-aways from this project? What did you learn?</br>
 >> How did you grow as a team, using the Essence standard to evaluate yourself?</br>
