@@ -83,6 +83,8 @@ If this turns out to be easy, we will see if there are other parameters we can â
 >> Optional (point 4): the patch is clean.</br>
 >> Optional (point 5): considered for acceptance (passes all automated checks).
 
+[Patch](https://github.com/sofrel-group14/guava/commit/cc88541db92ee3a856e2e0d34cf8233dcb7651bb)
+
 ## Test results
 
 >> Overall results with link to a copy or excerpt of the logs (before/after refactoring).
