@@ -85,12 +85,10 @@ If this turns out to be easy, we will see if there are other parameters we can â
 
 ## Test results
 
-Overall results with link to a copy or excerpt of the logs (before/after refactoring).</br>
-Before: [Here](https://docs.google.com/document/d/1SmHswX45TzwtsTXoYMrXX6k52KqOTBMEbWvpdAyyb-E/edit?usp=sharing)</br>
-Results: TODO: insert link to full log</br>
+>> Overall results with link to a copy or excerpt of the logs (before/after refactoring).
+Before: [Here](https://docs.google.com/document/d/1SmHswX45TzwtsTXoYMrXX6k52KqOTBMEbWvpdAyyb-E/edit?usp=sharing) is a link to the full log.</br>
 
-Before:
-The only test that failed is correlated to an android specific test. Since the issue we are working on is not related to android we believe that this test fail will not impact our work.
+The only test that failed is correlated to an android specific test. Since the issue we are working on is not related to android we believe that this test fail will not impact our work. Excerpt from before log:
 ```
 Failed tests: 
   testJarFileWithSpaces(com.google.common.reflect.ClassPathTest): value of: getTopLevelClasses()
@@ -112,6 +110,30 @@ Tests run: 858390, Failures: 1, Errors: 0, Skipped: 515
 [INFO] Total time:  12:11 min
 [INFO] Finished at: 2021-03-02T10:35:08+01:00
 [INFO] ------------------------------------------------------------------------
+```
+
+After: [Here](https://docs.google.com/document/d/1EWexvAFWH3jZcWLu2l3IUHmhOSroaQbGOZtW31NiI58/edit?usp=sharing) is a link to the full log.</br>
+Excerpt from after log:
+```
+Failed tests: 
+  testJarFileWithSpaces(com.google.common.reflect.ClassPathTest): value of: getTopLevelClasses()
+
+Tests run: 858392, Failures: 1, Errors: 0, Skipped: 515
+
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Guava Maven Parent HEAD-jre-SNAPSHOT:
+[INFO] 
+[INFO] Guava Maven Parent ................................. SUCCESS [  0.272 s]
+[INFO] Guava: Google Core Libraries for Java .............. SUCCESS [ 14.226 s]
+[INFO] Guava BOM .......................................... SUCCESS [  0.079 s]
+[INFO] Guava Testing Library .............................. SUCCESS [01:55 min]
+[INFO] Guava Unit Tests ................................... FAILURE [09:06 min]
+[INFO] Guava GWT compatible libs .......................... SKIPPED 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11:16 min
+[INFO] Finished at: 2021-03-08T16:13:59+01:00
 ```
 
 
