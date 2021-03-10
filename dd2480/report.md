@@ -86,6 +86,7 @@ If this turns out to be easy, we will see if there are other parameters we can â
 ## Test results
 
 >> Overall results with link to a copy or excerpt of the logs (before/after refactoring).
+
 Before: [Here](https://docs.google.com/document/d/1SmHswX45TzwtsTXoYMrXX6k52KqOTBMEbWvpdAyyb-E/edit?usp=sharing) is a link to the full log.</br>
 
 The only test that failed is correlated to an android specific test. Since the issue we are working on is not related to android we believe that this test fail will not impact our work. Excerpt from before log:
